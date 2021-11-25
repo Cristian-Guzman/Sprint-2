@@ -10,7 +10,7 @@ export const ImgLogo = styled.img`
 
 export const NavBarStyle = styled.nav`
     display: flex;
-    justify-content: space-between;
+    justify-content: ${props => 'space-between' || props.justify};
     margin-top: 1.5rem;
     align-items: center;
  `

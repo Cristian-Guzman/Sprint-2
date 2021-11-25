@@ -1,30 +1,40 @@
-// import React from 'react'
+import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
+import { ImgShop, NavBarStyle } from '../styles/navbar.style'
+import { ContenedorModal } from '../styles/productsInfo.style'
+import Combos from './Combos'
+import ProductoCantidad from './ProductoCantidad'
+import Sabores from './Sabores'
 
-// export function ProductsInfo() {
-//     const [info, setInfo] = useState([]);
-//     const getData = async () => {
-//         const response = await fetch('https://srpint2.herokuapp.com/tamales');
-//         const data = await response.json();
-//         setInfo(data);
-//     }
-//     getData()
-    
-//     return (
-//         <>
-//             {
-//                 info.map(({ precio, sabor, imagen, id }) => {
+export default function ProductsInfo() {
+    const {id} = useParams()
+    const [tipo, setTipo] = useState()
 
-//                     return (<tr key={imagen}>
-//                         <th>Tamal</th>
-//                         <th>{sabor}</th>
-//                         <th>{precio}</th>
-//                         <th><img alt=" " width="50" height="50" src={imagen} /></th>
-//                         <botton className="btnEliminar" onClick={() => deleteData(id)}>Eliminar</botton>
-//                     </tr>)
-//                 })
-//             }
-//         </>
-//     )
-// }
+    useEffect(() => {
+        if (id.substring(0, 5).toLowerCase() === 'tamal') {
+            setTipo('tamal');
+        } else if (id.substring(0, 5).toLowerCase() === 'guaja') {
+            setTipo('guajalota');
+        } else {
+            setTipo('bebida');
+        }
+    }, [id])
 
-// export default ProductsInfo
+    return (
+        <>
+            <ContenedorModal>
+                <NavBarStyle>
+                    <Link to="/"><img className={'rotate'} src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNOC4xMjIgMjRsLTQuMTIyLTQgOC04LTgtOCA0LjEyMi00IDExLjg3OCAxMnoiLz48L3N2Zz4=" alt=" "/></Link>
+                    <ImgShop src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-shopping-cart-interface-kiranshastry-lineal-kiranshastry-1.png" />
+                </NavBarStyle>
+                <ProductoCantidad />  
+                <Sabores alimento={tipo} />
+                <Combos alimento={tipo} />
+            </ContenedorModal>
+        </>
+    )
+}
+

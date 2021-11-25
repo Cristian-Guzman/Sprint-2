@@ -17,9 +17,30 @@ const theme = {
 export const GlobalStyles = createGlobalStyle`
   html {
       font-size: 62.5%;
-    box-sizing: border-box;
-    /* overflow-x: hidden; */
-    font-family: 'Krub', sans-serif;
+        box-sizing: border-box;
+        font-family: 'Krub', sans-serif;
 }
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    .rotate {
+            transform: rotate(180deg);
+    }
+    .display {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2 {
+            width: auto;
+            font-size: 2.2rem;
+        }
+        h3 {
+            width: auto;
+            color: ${props => props.theme.colors.naranja};
+            font-size: 1.8rem;
+            margin-top: -1rem;
+        }
+    }
 `
 export default theme;
