@@ -12,6 +12,7 @@ import Sabores from './Sabores'
 export default function ProductsInfo() {
     const {id} = useParams()
     const [tipo, setTipo] = useState()
+    const [contar, setContar] = useState(0)
 
     useEffect(() => {
         if (id.substring(0, 5).toLowerCase() === 'tamal') {
@@ -28,11 +29,11 @@ export default function ProductsInfo() {
             <ContenedorModal>
                 <NavBarStyle>
                     <Link to="/"><img className={'rotate'} src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNOC4xMjIgMjRsLTQuMTIyLTQgOC04LTgtOCA0LjEyMi00IDExLjg3OCAxMnoiLz48L3N2Zz4=" alt=" "/></Link>
-                    <ImgShop src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-shopping-cart-interface-kiranshastry-lineal-kiranshastry-1.png" />
+                    <Link to="/carrito"> <ImgShop src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-shopping-cart-interface-kiranshastry-lineal-kiranshastry-1.png" /></Link>
                 </NavBarStyle>
-                <ProductoCantidad />  
+                <ProductoCantidad setContar={setContar} />
                 <Sabores alimento={tipo} />
-                <Combos alimento={tipo} />
+                <Combos alimento={tipo} contar={contar} />
             </ContenedorModal>
         </>
     )

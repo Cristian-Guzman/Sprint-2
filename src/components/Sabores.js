@@ -5,11 +5,15 @@ import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import { ContenedorSabor, TituloSabor, SaboresImagen } from '../styles/sabores.style'
+import { v4 as uuid } from 'uuid';
 
 const Sabores = ({ alimento }) => {
     const [state, setState] = useState(false)
+    const [current, setCurrent] = useState(0);
     const [firsPara, setfirsPara] = useState('')
+    const [secondPara, setSecondPara] = useState('')
     const {id} = useParams();
+
     const imagenesComidas = [
         {
             img: "https://res.cloudinary.com/workshop-principe/image/upload/v1637714644/Guappjolotas/Property_1_verde_bprokc.png",
@@ -18,10 +22,6 @@ const Sabores = ({ alimento }) => {
         {
             img: "https://res.cloudinary.com/workshop-principe/image/upload/v1637714644/Guappjolotas/Property_1_mole_qxgnej.png",
             url: 'Mole'
-        },
-        {
-            img: "https://res.cloudinary.com/workshop-principe/image/upload/v1637714644/Guappjolotas/Property_1_rajas_w4jbht.png",
-            url: 'Rajas'
         },
         {
             img: "https://res.cloudinary.com/workshop-principe/image/upload/v1637714644/Guappjolotas/Property_1_pi%C3%B1a_pnwxil.png",
@@ -59,19 +59,18 @@ const Sabores = ({ alimento }) => {
         if (alimento === 'tamal') {
             setState(false)
             setfirsPara('tamales')
+            setSecondPara('Tamal')
         } else if (alimento === 'guajalota'){
             setState(false)
             setfirsPara('guajolotas')
+            setSecondPara('Guajalota')
         }
          else {
             setState(true)
             setfirsPara('bebidas')
+            setSecondPara('Bebida')
         }
     }, [alimento])
-
-        console.log(alimento)
-        console.log(id)
-        console.log(firsPara);
     const { guajolota, bebida } = useFetch();
     return (
         <>
@@ -79,21 +78,21 @@ const Sabores = ({ alimento }) => {
             <ContenedorSabor>
                 {
                     state ? (
-                            imagenesBebidas.map(({img, url}, index) => {
-                                console.log(url)
+                            imagenesBebidas.map(({img, url}, i) => {
                                 return(
                                     <>
-                                        <Link key={`65412$${index}`} to={`/${firsPara}/${url}`}>
-                                            <img src={img} alt=" " />
+                                        <Link key={uuid()} to={`/${firsPara}/${url}`}>
+                                            <SaboresImagen className={current === i ? 'op' : 'opno'}
+                                                onClick={() => setCurrent(i)} src={img} alt=" " />
                                         </Link>
                                     </>
                             )})) : (
-                                 imagenesComidas.map(({img, url}, index) => {
-                                     console.log(`/${firsPara}/${firsPara} ${url}`)
+                                 imagenesComidas.map(({img, url}, i) => {
                                     return(
                                         <>
-                                            <Link key={`65421$${index}`} to={`/${firsPara}/${firsPara} ${url}`}>
-                                                <img src={img} alt=" " />
+                                            <Link key={uuid()} to={`/${firsPara}/${secondPara} ${url}`}>
+                                                <SaboresImagen className={current === i ? 'op' : 'opno'}
+                                                    onClick={() => setCurrent(i)} src={img} alt=" " />
                                             </Link>                                    
                                         </>
                                 )}))

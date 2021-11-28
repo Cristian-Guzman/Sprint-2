@@ -16,7 +16,8 @@ export const NavBarStyle = styled.nav`
  `
 
  export const ImgShop = styled.img`
-    height: 5rem;
+    height: ${props => props.height || '5rem'};
+    opacity: ${props => props.opacity};
  `
 
  export const HeaderText = styled.h1`
@@ -29,20 +30,25 @@ export const NavBarStyle = styled.nav`
  export const ContenedorSearch = styled.section`
     background-color: #c3bcbc7d;
     border-radius: 20px;
+    height: 5rem;
  `
 
  export const SearchImg = styled.svg`
     position: relative;
-    left: 3rem;
-    height: 3rem;
+    left: ${props => props.left || '3rem'};
+    height: ${props => props.height || '3rem'};
+    opacity: ${props => props.opacity || 1};
+    top: ${props => props.top}
  `
 
  export const SearchInput = styled.input`
     position: relative;
-    left: 4rem;
+    left: ${props => props.left || '4rem'};
     border: none;
     background-color: transparent;
     width: 65%;
     bottom: 1rem;
     outline:none;
+    font-size: 1.5rem;
+    padding-top: 2.5rem;
  `

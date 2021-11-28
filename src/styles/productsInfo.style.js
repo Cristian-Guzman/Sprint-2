@@ -5,7 +5,7 @@ export const ContenedorModal = styled.article`
     top: 0;
     height: 100vh;
     width: 92%;
-    background-color: #fff;
+    background-color: #f2f2f2;
 `
 
 export const ContenedorProducto = styled.div`
@@ -31,5 +31,21 @@ export const TituloProducto = styled.h3`
 export const DetalleProducto = styled.p`
     font-size: 1.8rem;
     font-weight: 900;
-    color: ${props => props.theme.colors.naranja}
+    color: ${props => props.theme.colors.naranja};
+`
+
+export const BotonComprar = styled.button`
+    border-radius: 2rem;
+    margin: 2rem 1rem;
+    padding: 2.5rem 5rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 2rem;
+    color: #fff;
+    font-weight: 400;
+    background-color: ${props => props.theme.colors.naranja};
+    span {
+        font-weight: 400;
+        margin-left: 1rem;
+    }
 `
